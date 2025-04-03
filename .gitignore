@@ -1,0 +1,29 @@
+# Node.js dependencies (for both backend and frontend)
+node_modules/
+package-lock.json
+
+# Environment variables (DO NOT PUSH THESE!)
+.env
+.env.development
+.env.production
+
+# Backend-specific ignores
+Backend/node_modules/
+Backend/dist/
+Backend/.cache/
+Backend/logs/
+
+# Frontend-specific ignores
+frontend\ BB2.0/node_modules/
+frontend\ BB2.0/.cache/
+frontend\ BB2.0/dist/
+
+# Build and cache files
+.vscode/
+.cache/
+dist/
+build/
+
+# Logs and temporary files
+*.log
+logs/
