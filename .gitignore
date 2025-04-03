@@ -7,6 +7,9 @@ package-lock.json
 .env.development
 .env.production
 
+Backend/.env.development.local
+Backend/.env.production.local
+
 # Backend-specific ignores
 Backend/node_modules/
 Backend/dist/
