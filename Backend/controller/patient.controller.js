@@ -17,8 +17,8 @@ const formatPatientData = (patient) => {
 
 export const searchPatients = async (req, res) => {
   if (!req.session.bbAccessToken) {
-    // return res.status(401).json({ error: "Unauthorized. Please log in." });
-    return res.redirect(302, "/auth/login");
+    return res.status(401).json({ error: "Unauthorized. Please log in." });
+    //return res.redirect(302, "/auth/login");
   }
 
   try {

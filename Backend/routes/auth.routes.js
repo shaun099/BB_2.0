@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAuthUrl } from "../service/auth.service.js";
-import { hanldeOAuthCallback } from "../controller/auth.controller.js";
+import { handleOAuthCallback } from "../controller/auth.controller.js";
 
 const router = Router();
 
@@ -10,6 +10,6 @@ router.get("/login", (req, res) => {
   res.redirect(getAuthUrl(state));
 });
 
-router.get("/callback", hanldeOAuthCallback);
+router.get("/callback", handleOAuthCallback);
 
 export default router;

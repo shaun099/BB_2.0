@@ -17,10 +17,14 @@ app.use(
 // Session middleware
 app.use(
   session({
-    secret: "your_secret_key",
+    secret: "your-secret-key",
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // Set to true in production with HTTPS
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true, // Security best practice
+      secure: false, // Set to true if using HTTPS
+      sameSite: "Lax", // Allows cookies to be sent on same-origin requests
+    },
   })
 );
 

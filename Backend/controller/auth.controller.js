@@ -1,20 +1,24 @@
 import { exchangeCodeForToken } from "../service/auth.service.js";
 
-export const hanldeOAuthCallback = async (req, res) => {
+export const handleOAuthCallback = async (req, res) => {
+  const { code, state } = req.query;
+
+  if (!state || state !== req.session.state) {
+    return res.status(400).json({ message: "Invalid state" });
+  }
+
+  // Success — clear state and continue
+  req.session.state = null;
+
   try {
-    if (req.query.state !== req.session.state) {
-      throw new Error("State mismatch");
-    }
+    const { access_token, patient } = await exchangeCodeForToken(code);
+    req.session.access_token = access_token;
+    req.session.patient_id = patient;
 
-    const { accessToken, patientId } = await exchangeCodeForToken(
-      req.query.code
-    );
-    req.session.bbAccessToken = accessToken;
-    req.session.patientId = patientId;
-
-    res.redirect("/api/patient");
+    res.redirect("http://localhost:5173");
+    //res.redirect("/api/patient");
   } catch (error) {
-    console.error("Auth error:", error);
-    res.status(500).send("Authentication failed");
+    console.error("OAuth callback error:", error);
+    res.status(500).json({ message: "OAuth Error" });
   }
 };
